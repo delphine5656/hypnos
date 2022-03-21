@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}S'inscrire chez Hypnos{% endblock %}
+
+{% block body %}
+
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <h1 class="text-center">S'inscrire chez Hypnos</h1>
+
+    <form class="p-2 m-4">
+        {{ form_start(registrationForm) }}
+        <div class="mb-3">
+            <label for="exampleInputNom" class="form-label">Votre nom: </label>
+            <div id="emailNom" class="form-text"> {{ form_row(registrationForm.firstname) }}</div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPrenom" class="form-label">Votre prénom: </label>
+            <div id="emailPrenom" class="form-text"> {{ form_row(registrationForm.lastnamme) }}</div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Votre email: </label>
+            <div id="emailHelp" class="form-text"> {{ form_row(registrationForm.email) }}</div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Votre mot de passe: </label>
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+        </div>
+        <div class="mb-3 form-check">
+            {{ form_row(registrationForm.agreeTerms) }}
+        </div>
+        <button class="btn btn-dark" type="submit">Register</button>
+        {{ form_end(registrationForm) }}
+    </form>
+
+
+{% endblock %}

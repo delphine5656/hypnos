@@ -2,18 +2,105 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Bienvenue sur le groupe hotelier Hypnos{% endblock %}</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
+
         {% endblock %}
 
         {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+
         {% endblock %}
     </head>
     <body>
+    <style>
+        /*reset css*/
+
+        html, body {
+            padding: 0;
+            border: 0;
+            vertical-align: baseline;
+            margin-right: 0;
+            margin-left: 0;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+        /*fin reset css*/
+        .btn{
+            border-radius: 10px;
+        }
+        .btn:hover{
+            color: blueviolet;
+        }
+        a{
+            color:white;
+            text-decoration: none;
+        }
+        a:hover{
+            color: blueviolet;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid black;
+            padding: 10px;
+
+        }
+    </style>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand text-light" href="{{ path('home') }}"><img class="logo-img" src="assets/images/header.svg"/></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ path('home') }}">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Nos hôtels</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Nos hôtels
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="">Paris</a></li>
+                                <li><a class="dropdown-item" href="">Cannes</a></li>
+                                <li><a class="dropdown-item" href="">Strasbourg</a></li>
+                                <li><a class="dropdown-item" href="">Quiberon</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Nous contacter</a>
+                        </li>
+
+                    </ul>
+                    <div class="nav-co">
+                        {% if app.user %}
+                            <a href="">Mon compte <small>({{ app.user.firstname }})</small></a> | <a href="">Déconnexion</a>
+                        {% else %}
+                            <a href="">Connexion</a>
+                            <a href="{{ path('app_register') }}">Sinscrire</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
         {% block body %}{% endblock %}
+    <footer class="bg-dark m-2 p-2">
+        <a class="text-center" href="#">CGV</a>
+        <p class="text-center text-light">Tout droit réservés @Hypnos-Delphine-Gavaud</p>
+    </footer>
+</div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </body>
 </html>

@@ -1,0 +1,218 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hypnos le groupe hôtelier haut de gamme{% endblock %}
+
+{% block body %}
+<style>
+    .header {
+        background-image: url('assets/images/header.jpg');
+        height: 20vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start ;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-y: 75%;
+    }
+    h1, h3 {
+        color: white;
+        text-align: center;
+
+
+    }
+    h1 {
+        margin-top: 1.8em;
+        font-size: 85px;
+    }
+
+    .header-text {
+        display: flex;
+        align-items: flex-end;
+        justify-content: end;
+        flex-direction: column;
+    }
+
+    .poly {
+        height: 200px;
+        width: 100vw;
+        background-color: black;
+        clip-path: polygon(0 0, 100% 0, 52% 46%, 52% 46%);
+    }
+
+    h2{
+        text-align: center;
+    }
+
+    .argument {
+        background-image: url("assets/images/argument.jpg");
+        height: 300px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 1.2em;
+        margin-top: 1em;
+    }
+    h4 {
+        color: white;
+        margin-left: 1.2em;
+        margin-top: 1.2em;
+    }
+
+    .hotel-list{
+        background-image: url("assets/images/bg-hotel.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position-x: right;
+
+    }
+
+    @media (min-width: 769px) {
+        .header {
+          flex-direction: column;
+            height: 90vh;
+          justify-content: start;
+            align-items: center;
+        }
+        .group-btn {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+    }
+
+
+</style>
+
+<header class="header">
+    <div>
+        <h1 class="text-decoration-underline">HYPNOS</h1>
+        <div class="header-text">
+            <h3>Le séjour romantique par excellence</h3>
+            <div class="group-btn">
+                <button class="btn btn-dark">Réserver</button>
+                <button class="btn btn-dark">Voir les hôtels</button>
+            </div>
+
+        </div>
+
+    </div>
+</header>
+    <div class="poly"></div>
+    <main>
+        <h2>A propos de nous</h2>
+        <div class="row">
+            <div class=" col-sm-12 col-md-6">
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            </div>
+            <div class=" col-sm-12 col-md-6">
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            </div>
+        </div>
+        <button class="btn btn-dark">Nous contacter</button>
+        <section class="argument">
+            <h4>Lorem</h4>
+            <h4>Lorem</h4>
+            <h4>Lorem</h4>
+            <h4>Lorem</h4>
+        </section>
+
+        <section>
+            <h2>Nos engagements</h2>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card bg-transparent m-2">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-dark">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card bg-transparent m-2">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-dark">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hotel-list">
+            <div class="row">
+                <div class="col-md-4">
+                     <div class="card text-center bg-transparent m-2" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                     <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-dark">Go somewhere</a>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card text-center bg-transparent m-2" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-dark">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card text-center bg-transparent m-2" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-dark">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card text-center bg-transparent m-2" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-dark">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card text-center bg-transparent m-2" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-dark">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card text-center bg-transparent m-2" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-dark">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+{% endblock %}
