@@ -51,6 +51,11 @@ class Gerant implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $etablissement;
 
+    public function __toString()
+    {
+        return $this->getfirstname();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Contact;
 use App\Entity\Etablissement;
 use App\Entity\Gerant;
 use App\Entity\Reservation;
@@ -37,7 +38,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Etablissement', ' fa fa-solid fa-hotel', Etablissement::class);
         yield MenuItem::linkToCrud('Gérant', 'fa fas fa-user', Gerant::class);
         yield MenuItem::linkToCrud('Réservation', 'fa fa-solid fa-calendar', Reservation::class);
-        yield MenuItem::linkToCrud('Suite', 'fas fa-solid fa-bed-front', Suite::class);
+        yield MenuItem::linkToCrud('Suite', 'fas fa-solid fa-list', Suite::class);
         yield MenuItem::linkToCrud('Ville', 'fa fa-solid fa-city', Ville::class);
+        yield MenuItem::linkToCrud('Contact', 'fas fa-envelope', Contact::class);
     }
 }

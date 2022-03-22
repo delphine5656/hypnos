@@ -14,9 +14,12 @@
             <h3 class="text-center">{{ hotel.villes }}</h3>
             <p class="text-center">{{ hotel.adress }}</p>
             <p class="text-center">{{ hotel.description }}</p>
-
-
-            <a href="" class="btn btn-dark p-1">Réserver</a>
+            <h5 class="text-center">Nos suites: </h5>
+                    <ul>
+                        {% for suite in hotel.suites %}
+                        <li class="text-center">{{ suite }}: <a class="btn btn-dark" href="{{ path('suite', {'slug' : suite.slug}) }}">voir la suite</a></li>
+                    </ul>
+                        {% endfor %}
         </div>
 
     </div>
