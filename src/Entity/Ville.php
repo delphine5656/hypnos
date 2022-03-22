@@ -34,9 +34,15 @@ class Ville
      */
     private $suites;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Etablissement::class, mappedBy="ville", orphanRemoval=true)
+     */
+    private $etablissements;
+
     public function __construct()
     {
         $this->suites = new ArrayCollection();
+        $this->etablissements = new ArrayCollection();
     }
 
     public function __toString()
@@ -97,6 +103,36 @@ class Ville
             // set the owning side to null (unless already changed)
             if ($suite->getVille() === $this) {
                 $suite->setVille(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Etablissement>
+     */
+    public function getEtablissements(): Collection
+    {
+        return $this->etablissements;
+    }
+
+    public function addEtablissement(Etablissement $etablissement): self
+    {
+        if (!$this->etablissements->contains($etablissement)) {
+            $this->etablissements[] = $etablissement;
+            $etablissement->setVille($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEtablissement(Etablissement $etablissement): self
+    {
+        if ($this->etablissements->removeElement($etablissement)) {
+            // set the owning side to null (unless already changed)
+            if ($etablissement->getVille() === $this) {
+                $etablissement->setVille(null);
             }
         }
 

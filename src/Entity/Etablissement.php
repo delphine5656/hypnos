@@ -111,6 +111,12 @@ class Etablissement
      */
     private $gerant;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Ville::class, inversedBy="etablissements")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $ville;
+
     public function __construct()
     {
         $this->suites = new ArrayCollection();
@@ -222,6 +228,18 @@ class Etablissement
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getVille(): ?Ville
+    {
+        return $this->ville;
+    }
+
+    public function setVille(?Ville $ville): self
+    {
+        $this->ville = $ville;
 
         return $this;
     }

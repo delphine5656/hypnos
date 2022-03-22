@@ -35,6 +35,8 @@ class EtablissementCrudController extends AbstractCrudController
             TextareaField::new('adress'),
             TextareaField::new('description'),
             IntegerField::new('nombreSuite'),
+            AssociationField::new('ville'),
+            AssociationField::new('gerant')
         ];
 
         if ($pageName == Crud::PAGE_INDEX || $pageName == Crud::PAGE_DETAIL) {
