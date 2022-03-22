@@ -38,7 +38,7 @@ class Gerant implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $firstnamme;
+    private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)

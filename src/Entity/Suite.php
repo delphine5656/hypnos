@@ -6,9 +6,13 @@ use App\Repository\SuiteRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity(repositoryClass=SuiteRepository::class)
+ * @Vich\Uploadable()
  */
 class Suite
 {
@@ -27,7 +31,110 @@ class Suite
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $thumbnail;
+
+    /**
+     * @Vich\UploadableField(mapping="thumbnails", fileNameProperty="thumbnail")
+     * @var File|null
+     */
+    private $thumbnailFile;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $image;
+
+    /**
+     * @Vich\UploadableField(mapping="attachments", fileNameProperty="thumbnail")
+     * @var File|null
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+    /**
+     * @return mixed
+     */
+    public function getThumbnailFile()
+    {
+        return $this->thumbnailFile;
+    }
+
+    /**
+     * @param mixed $thumbnailFile
+     */
+    public function setThumbnailFile(File $thumbnailFile=null): self
+    {
+        $this->thumbnailFile = $thumbnailFile;
+
+        if (null !== $thumbnailFile) {
+            $this->updatedAt = new \DateTime();
+        }
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getThumbnail()
+    {
+        return $this->thumbnail;
+    }
+
+    /**
+     * @param mixed $thumbnail
+     */
+    public function setThumbnail($thumbnail): void
+    {
+        $this->thumbnail = $thumbnail;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param mixed $imageFile
+     */
+    public function setImageFile(File $imageFile=null): self
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            $this->updatedAt = new \DateTime();
+        }
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image): void
+    {
+        $this->image = $image;
+    }
 
     /**
      * @ORM\Column(type="text")
@@ -61,10 +168,21 @@ class Suite
      */
     private $reservation;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Attachement::class, mappedBy="suite", cascade={"persist"})
+     */
+    private $attachements;
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
         $this->reservation = new ArrayCollection();
+        $this->attachements = new ArrayCollection();
+        $this->updatedAt = new \DateTime();
+    }
+    public function __toString()
+    {
+        return $this->getTitre();
     }
 
     public function getId(): ?int
@@ -80,18 +198,6 @@ class Suite
     public function setTitre(string $titre): self
     {
         $this->titre = $titre;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(string $image): self
-    {
-        $this->image = $image;
 
         return $this;
     }
@@ -177,5 +283,42 @@ class Suite
     public function getReservation(): Collection
     {
         return $this->reservation;
+    }
+
+    /**
+     * @return Collection<int, Attachement>
+     */
+    public function getAttachements(): Collection
+    {
+        return $this->attachements;
+    }
+
+    public function addAttachement(Attachement $attachement): self
+    {
+        if (!$this->attachements->contains($attachement)) {
+            $this->attachements[] = $attachement;
+            $attachement->setSuite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttachement(Attachement $attachement): self
+    {
+        if ($this->attachements->removeElement($attachement)) {
+            // set the owning side to null (unless already changed)
+            if ($attachement->getSuite() === $this) {
+                $attachement->setSuite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }

@@ -1,0 +1,7 @@
+# config/packages/easy_admin.yaml
+#easy_admin:
+#    entities:
+#        # List the entity class name you want to manage
+#        - App\Entity\Etablissement
+#        - App\Entity\Suite
+#        - App\Entity\User

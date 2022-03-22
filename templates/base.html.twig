@@ -86,10 +86,10 @@
                     </ul>
                     <div class="nav-co">
                         {% if app.user %}
-                            <a href="">Mon compte <small>({{ app.user.firstname }})</small></a> | <a href="">Déconnexion</a>
+                            <a href="">Mon compte <small>({{ app.user.firstname }})</small></a> | <a href="{{ path('app_logout') }}">Déconnexion</a>
                         {% else %}
-                            <a href="">Connexion</a>
-                            <a href="">Sinscrire</a>
+                            <a href="{{ path('app_login') }}">Connexion</a>
+                            <a href="{{ path('app_register') }}">Sinscrire</a>
                         {% endif %}
                     </div>
                 </div>
