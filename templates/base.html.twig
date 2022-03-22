@@ -66,11 +66,14 @@
                             <a class="nav-link active" aria-current="page" href="{{ path('home') }}">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Nos hôtels</a>
+                            <a class="nav-link" href="{{ path('app_hotels') }}">Nos hôtels</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('suites') }}">Nos suites</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Nos hôtels
+                            <a class="nav-link dropdown-toggle" href="{{ path('app_hotels') }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Nos villes
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="">Paris</a></li>

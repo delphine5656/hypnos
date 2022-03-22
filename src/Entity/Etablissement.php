@@ -115,7 +115,12 @@ class Etablissement
      * @ORM\ManyToOne(targetEntity=Ville::class, inversedBy="etablissements")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $ville;
+    private $villes;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -232,14 +237,26 @@ class Etablissement
         return $this;
     }
 
-    public function getVille(): ?Ville
+    public function getVilles(): ?Ville
     {
-        return $this->ville;
+        return $this->villes;
     }
 
-    public function setVille(?Ville $ville): self
+    public function setVilles(?Ville $villes): self
     {
-        $this->ville = $ville;
+        $this->villes = $villes;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

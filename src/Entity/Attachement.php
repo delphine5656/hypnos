@@ -60,6 +60,11 @@ class Attachement
      */
     private $updatedAt;
 
+    public function __toString()
+    {
+        return $this->getImage();
+    }
+
     /**
      * @return mixed
      */

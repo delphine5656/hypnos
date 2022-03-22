@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ suite.titre }}{% endblock %}
+
+{% block body %}
+
+    <h1 class="text-center">{{ suite.titre }}</h1>
+    <div class="row">
+        <div class="col-4">
+            <img src="/images/thumbnails/{{ suite.thumbnail }}">
+            <div>
+                {% for images in suite.attachements %}
+                    <img src="/images/attachments/{{ images }}">
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-7">
+            <h5 class="text-center">Le lieu: l'hôtel {{ suite.etablissement }} - {{ suite.ville }}</h5>
+            <p class="text-center">Le tarif: {{ suite.price / 100}}€ /nuit</p>
+            <h3 class="text-center">{{ suite.description }}</h3>
+
+
+
+            <a href="" class="btn btn-dark p-1">Voir les suites</a>
+        </div>
+
+    </div>
+
+
+{% endblock %}

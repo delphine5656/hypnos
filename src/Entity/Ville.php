@@ -35,7 +35,7 @@ class Ville
     private $suites;
 
     /**
-     * @ORM\OneToMany(targetEntity=Etablissement::class, mappedBy="ville", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Etablissement::class, mappedBy="villes", orphanRemoval=true)
      */
     private $etablissements;
 
