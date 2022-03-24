@@ -178,6 +178,12 @@ class Suite
      */
     private $slug;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Gerant::class, inversedBy="suite")
+     * @ORM\JoinColumn
+     */
+    private $gerant;
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
@@ -335,6 +341,18 @@ class Suite
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getGerant(): ?Gerant
+    {
+        return $this->gerant;
+    }
+
+    public function setGerant(?Gerant $gerant): self
+    {
+        $this->gerant = $gerant;
 
         return $this;
     }

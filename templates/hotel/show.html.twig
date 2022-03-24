@@ -3,26 +3,26 @@
 {% block title %} {{ hotel.name }}{% endblock %}
 
 {% block body %}
-
-    <h1 class="">{{ hotel.name }}</h1>
-    <div class="row">
-        <div class="col-4">
-            <img src="/images/thumbnails/{{ hotel.thumbnail }}">
+    <h1 class="display-1 text-center">{{ hotel.name }} à <span>{{ hotel.villes }}</span></h1>
+    <p class="text-center">{{ hotel.adress }}</p>
+    <main class="container-fluid">
+        <hr>
+        <div class="row">
+            <div class="col-md-7">
+                <p class="text-center">{{ hotel.description }}</p>
+                <h3 class="text-center">Nos suites: </h3>
+                <ul>
+                {% for suite in hotel.suites %}
+                    <h5 class="text-decoration-underline display-6 text-center">{{ suite }}: <a class="btn btn-dark" href="{{ path('suite', {'slug' : suite.slug}) }}">voir la suite</a></h5>
+                </ul>
+                {% endfor %}
+            </div>
+            <div class="col-md-5">
+                <img src="/images/thumbnails/{{ hotel.thumbnail }}" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500">
+            </div>
         </div>
-        <div class="col-7">
-            <h3 class="text-center">{{ hotel.name }}</h3>
-            <h3 class="text-center">{{ hotel.villes }}</h3>
-            <p class="text-center">{{ hotel.adress }}</p>
-            <p class="text-center">{{ hotel.description }}</p>
-            <h5 class="text-center">Nos suites: </h5>
-                    <ul>
-                        {% for suite in hotel.suites %}
-                        <li class="text-center">{{ suite }}: <a class="btn btn-dark" href="{{ path('suite', {'slug' : suite.slug}) }}">voir la suite</a></li>
-                    </ul>
-                        {% endfor %}
-        </div>
-
-    </div>
+        <hr>
+    </main>
 
 
 {% endblock %}

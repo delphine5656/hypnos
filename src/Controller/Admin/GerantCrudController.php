@@ -25,6 +25,7 @@ class GerantCrudController extends AbstractCrudController
             EmailField::new('email'),
             TextField::new('password'),
             AssociationField::new('etablissement'),
+            AssociationField::new('suite'),
             TextField::new('firstname'),
             TextField::new('lastname')
         ];

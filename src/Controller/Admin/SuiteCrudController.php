@@ -48,7 +48,8 @@ class SuiteCrudController extends AbstractCrudController
 
             MoneyField::new('price')->setCurrency('EUR'),
             AssociationField::new('etablissement'),
-            AssociationField::new('ville')
+            AssociationField::new('ville'),
+            AssociationField::new('gerant')
         ];
 
         if ($pageName == Crud::PAGE_INDEX || $pageName == Crud::PAGE_DETAIL) {

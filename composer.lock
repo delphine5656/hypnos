@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1878aca4d752d7fae338534499815bf6",
+    "content-hash": "4460f6e4345339b47a99e448f0ba2f64",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -8325,6 +8325,56 @@
                 "source": "https://github.com/SymfonyCasts/verify-email-bundle/tree/v1.10.0"
             },
             "time": "2022-03-08T22:08:27+00:00"
+        },
+        {
+            "name": "twbs/bootstrap",
+            "version": "v5.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twbs/bootstrap.git",
+                "reference": "f20fece3a8cdd0e76a42c2737524b7652bf54d26"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/f20fece3a8cdd0e76a42c2737524b7652bf54d26",
+                "reference": "f20fece3a8cdd0e76a42c2737524b7652bf54d26",
+                "shasum": ""
+            },
+            "replace": {
+                "twitter/bootstrap": "self.version"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Otto",
+                    "email": "markdotto@gmail.com"
+                },
+                {
+                    "name": "Jacob Thornton",
+                    "email": "jacobthornton@gmail.com"
+                }
+            ],
+            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
+            "homepage": "https://getbootstrap.com/",
+            "keywords": [
+                "JS",
+                "css",
+                "framework",
+                "front-end",
+                "mobile-first",
+                "responsive",
+                "sass",
+                "web"
+            ],
+            "support": {
+                "issues": "https://github.com/twbs/bootstrap/issues",
+                "source": "https://github.com/twbs/bootstrap/tree/v5.1.0"
+            },
+            "time": "2021-08-04T15:41:51+00:00"
         },
         {
             "name": "twig/extra-bundle",

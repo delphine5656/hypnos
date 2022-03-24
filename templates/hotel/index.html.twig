@@ -3,29 +3,26 @@
 {% block title %}Nos hôtels{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="container">
-    <h1>Les hôtels d'hypnos dans toutes la France</h1>
-    <div class="row">
-        <div class="col-md-9 mb-2">
-
-            <div class="row">
-                {% for hotel in hotels %}
-                    <div class="card position-relative m-2 p-2 " style="width: 18rem;">
-                        <img src="/images/thumbnails/{{ hotel.thumbnail }}">
-                        <h5 class="text-center">{{ hotel.name }}</h5>
-                        <h5 class="text-center">{{ hotel.villes }}</h5>
-                        <p>{{ hotel.description }}</p>
-                        <a href="{{ path('hotel', {'slug' : hotel.slug}) }}" class="btn btn-dark btn-sm ">voir l'hôtel</a>
-                    </div>
-                {% endfor %}
+    <main class="container-fluid">
+    <h1 class="display-1 text-center mt-2">Les hôtels d'hypnos dans toutes la France</h1>
+    <div class="row mb-2">
+    {% for hotel in hotels %}
+        <div class="col-md-4">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative ">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <h3 class="mb-0 text-center">{{ hotel.name }}</h3>
+                    <h5 class="mb-0 text-center">{{ hotel.villes }}</h5>
+                    <p class="card-text mb-auto">{{ hotel.shortDescription }}</p>
+                    <a href="{{ path('hotel', {'slug' : hotel.slug}) }}" class="btn btn-dark btn-sm ">voir l'hôtel</a>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                <img  class=" img-fluid" width="250" height="250" src="/images/thumbnails/{{ hotel.thumbnail }}">
+                </div>
             </div>
         </div>
+    {% endfor %}
     </div>
 
-</div>
+    </main>
 {% endblock %}

@@ -1,35 +1,44 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Bienvenue sur le groupe hotelier Hypnos{% endblock %}</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="AliExprass" name="author">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Exclusively for all! Take advantage of up to -50% on these offers during our smart days. Shop smart with discounts on electronics, phones and home goods. Up to -50% Buyer Protection. Free Shipping. Summer promo. Great Value. A multitude of sellers.">
+        <meta name="keywords" content="">
 
+        <title>{% block title %}Bienvenue sur le groupe hotelier Hypnos{% endblock %}</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
-
+            {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
     <body>
     <style>
+        @import "~bootstrap/scss/bootstrap";
         /*reset css*/
-
-        html, body {
+        *, ::before, ::after{
+            box-sizing: border-box;
             padding: 0;
             border: 0;
-            vertical-align: baseline;
-            margin-right: 0;
-            margin-left: 0;
         }
 
-        ol, ul {
+        body {
+            height: 100vh;
+        }
+        ol, ul, li {
             list-style: none;
         }
         /*fin reset css*/
+
+
         .btn{
             border-radius: 10px;
         }
@@ -53,10 +62,10 @@
 
         }
     </style>
-    <div class="container-fluid">
+    <div >
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand text-light" href="{{ path('home') }}"><img class="logo-img" src="assets/images/header.svg"/></a>
+                <a class="navbar-brand text-light" href="{{ path('home') }}"><img class="logo-img" height="55" src="assets/images/logo.jpg"/></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                 </button>
@@ -70,17 +79,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('suites') }}">Nos suites</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="{{ path('app_hotels') }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Nos villes
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="">Paris</a></li>
-                                <li><a class="dropdown-item" href="">Cannes</a></li>
-                                <li><a class="dropdown-item" href="">Strasbourg</a></li>
-                                <li><a class="dropdown-item" href="">Quiberon</a></li>
-                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('app_contact_new') }}">Nous contacter</a>
@@ -100,10 +98,14 @@
         </nav>
         {% block body %}{% endblock %}
     <footer class="bg-dark m-2 p-2">
+        <p class="float-end mb-1">
+            <a href="#">Back to top</a>
+        </p>
         <a class="text-center" href="#">CGV</a>
         <p class="text-center text-light">Tout droit réservés @Hypnos-Delphine-Gavaud</p>
     </footer>
 </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     </body>
 </html>

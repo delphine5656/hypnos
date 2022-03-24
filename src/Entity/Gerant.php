@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\GerantRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -27,7 +29,7 @@ class Gerant implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private $roles = ["ROLE_EDITOR"];
 
     /**
      * @var string The hashed password
@@ -50,6 +52,16 @@ class Gerant implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\JoinColumn(nullable=false)
      */
     private $etablissement;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Suite::class, mappedBy="gerant", orphanRemoval=true)
+     */
+    private $suite;
+
+    public function __construct()
+    {
+        $this->suite = new ArrayCollection();
+    }
 
     public function __toString()
     {
@@ -98,7 +110,7 @@ class Gerant implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_EDITOR';
 
         return array_unique($roles);
     }
@@ -177,6 +189,36 @@ class Gerant implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEtablissement(Etablissement $etablissement): self
     {
         $this->etablissement = $etablissement;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Suite>
+     */
+    public function getSuite(): Collection
+    {
+        return $this->suite;
+    }
+
+    public function addSuite(Suite $suite): self
+    {
+        if (!$this->suite->contains($suite)) {
+            $this->suite[] = $suite;
+            $suite->setGerant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSuite(Suite $suite): self
+    {
+        if ($this->suite->removeElement($suite)) {
+            // set the owning side to null (unless already changed)
+            if ($suite->getGerant() === $this) {
+                $suite->setGerant(null);
+            }
+        }
 
         return $this;
     }
