@@ -24,11 +24,11 @@
                                     <h4>{{ suite.titre }}</h4>
                                     <h5>l'hôtel {{ suite.etablissement }} - {{ suite.ville }}</h5>
                                     <p class="card-text">{{ suite.description }}</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
+                                        <div class="text-center">
+                                            <div class="btn-group">
                                             <a href="{{ path('suite', {'slug' : suite.slug}) }}" class="btn btn-dark btn-sm ">voir la suite</a>
+                                            </div>
                                         </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
