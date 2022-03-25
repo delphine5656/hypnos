@@ -13,6 +13,10 @@
 
     <main class="container-fluid">
         <h1 class="display-1 text-center">Les suites d'Hypnos dans toutes la France</h1>
+        <div class="mb-2">
+            <h3>Filtrer</h3>
+            {{ form(form) }}
+        </div>
         <section class="py-5">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
                     {% for suite in suites %}
