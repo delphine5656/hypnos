@@ -3,31 +3,32 @@
 {% block title %} {{ suite.titre }}{% endblock %}
 
 {% block body %}
-
+    <header class="text-center">
     <h1 class="display-1 text-center">{{ suite.titre }} <span>{{ suite.price / 100}}€ /nuit</span></h1>
     <h2 class="text-center">l'hôtel {{ suite.etablissement }} - {{ suite.ville }}</h2>
-    <a href="" class="btn btn-dark p-1">Réserver</a>
+    <a href="{{ path('app_booking_new') }}" class="btn btn-dark btn-lg p-1">Réserver</a>
+    </header>
 
-    <div class="container marketing my-3">
+    <section class="container marketing my-3">
         <hr>
         <div class="row">
             <div class="col-lg-4">
-                <h2>Heading</h2>
-                <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
+                <h2>Spa privatif</h2>
+                <p>Vous bénéficiez d'u spa privatif dans votre suite</p>
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4">
-                <h2>Heading</h2>
-                <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
+                <h2>Chauffeur 24h/24</h2>
+                <p>Un chauffeur est à votre disposition 24h/24 pour vous rendre où vous voulez</p>
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4">
-                <h2>Heading</h2>
-                <p>And lastly this, the third column of representative placeholder content.</p>
+                <h2>Séance de bien-être</h2>
+                <p>Une séance de bien-être vous est offerte tous les jours</p>
             </div><!-- /.col-lg-4 -->
         </div><!-- /.row -->
 
     <div class="my-3">
         {% for images in suite.attachements %}
-            <img src="/images/attachments/{{ images }}">
+            <img src="/images/attachments/{{ images }}" class="img-fluid">
         {% endfor %}
     </div>
         <!-- START THE FEATURETTES -->
@@ -36,80 +37,40 @@
 
         <div class="row featurette">
             <div class="col-md-7">
-                <h3 class="text-center">{{ suite.description }}</h3>
+                <h3>En savoir plus:</h3>
+                <p class="text-center">{{ suite.description }}</p>
             </div>
             <div class="col-md-5">
-                <div class="d-grid gap-1">
-                    <div class="cal">
-                        <div class="cal-month">
-                            <button class="btn cal-btn" type="button">
-                                <svg class="bi" width="16" height="16"><use xlink:href="#arrow-left-short"/></svg>
-                            </button>
-                            <strong class="cal-month-name">June</strong>
-                            <select class="form-select cal-month-name d-none">
-                                <option value="January">January</option>
-                                <option value="February">February</option>
-                                <option value="March">March</option>
-                                <option value="April">April</option>
-                                <option value="May">May</option>
-                                <option selected value="June">June</option>
-                                <option value="July">July</option>
-                                <option value="August">August</option>
-                                <option value="September">September</option>
-                                <option value="October">October</option>
-                                <option value="November">November</option>
-                                <option value="December">December</option>
-                            </select>
-                            <button class="btn cal-btn" type="button">
-                                <svg class="bi" width="16" height="16"><use xlink:href="#arrow-right-short"/></svg>
-                            </button>
-                        </div>
-                        <div class="cal-days">
-                            <button class="btn cal-btn" disabled type="button">30</button>
-                            <button class="btn cal-btn" disabled type="button">31</button>
 
-                            <button class="btn cal-btn" type="button">1</button>
-                            <button class="btn cal-btn" type="button">2</button>
-                            <button class="btn cal-btn" type="button">3</button>
-                            <button class="btn cal-btn" type="button">4</button>
-                            <button class="btn cal-btn" type="button">5</button>
-                            <button class="btn cal-btn" type="button">6</button>
-                            <button class="btn cal-btn" type="button">7</button>
-
-                            <button class="btn cal-btn" type="button">8</button>
-                            <button class="btn cal-btn" type="button">9</button>
-                            <button class="btn cal-btn" type="button">10</button>
-                            <button class="btn cal-btn" type="button">11</button>
-                            <button class="btn cal-btn" type="button">12</button>
-                            <button class="btn cal-btn" type="button">13</button>
-                            <button class="btn cal-btn" type="button">14</button>
-
-                            <button class="btn cal-btn" type="button">15</button>
-                            <button class="btn cal-btn" type="button">16</button>
-                            <button class="btn cal-btn" type="button">17</button>
-                            <button class="btn cal-btn" type="button">18</button>
-                            <button class="btn cal-btn" type="button">19</button>
-                            <button class="btn cal-btn" type="button">20</button>
-                            <button class="btn cal-btn" type="button">21</button>
-
-                            <button class="btn cal-btn" type="button">22</button>
-                            <button class="btn cal-btn" type="button">23</button>
-                            <button class="btn cal-btn" type="button">24</button>
-                            <button class="btn cal-btn" type="button">25</button>
-                            <button class="btn cal-btn" type="button">26</button>
-                            <button class="btn cal-btn" type="button">27</button>
-                            <button class="btn cal-btn" type="button">28</button>
-
-                            <button class="btn cal-btn" type="button">29</button>
-                            <button class="btn cal-btn" type="button">30</button>
-                            <button class="btn cal-btn" type="button">31</button>
-                        </div>
-                    </div>
-                </div>
+                <div  id="calendrier"></div>
 
             </div>
         </div>
         <!-- /END THE FEATURETTES -->
 
-    </div><!-- /.container -->
+    </section><!-- /.container -->
+{% endblock %}
+{% block javascripts %}
+
+    <script>
+        window.onload = () => {
+            let calendarElt = document.querySelector("#calendrier")
+            let calendar = new FullCalendar.Calendar(calendarElt, {
+                initialView: 'dayGridMonth',
+                local:'fr',
+                timeZone: 'Europe/Paris',
+                headerToolbar: {
+                    start: 'prev,next today',
+                    center: 'title',
+                    end: 'dayGridMonth,timeGridWeek'
+                },
+
+
+
+            });
+            calendar.render();
+        }
+
+    </script>
+
 {% endblock %}

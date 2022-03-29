@@ -8,8 +8,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Symfony\Component\Validator\Constraints\DateTime;
-
 
 /**
  * @ORM\Entity(repositoryClass=EtablissementRepository::class)
@@ -57,7 +55,7 @@ class Etablissement
 
     public function __toString()
     {
-        return $this->getName();
+        return $this->getName().'-'.$this->getVilles();
     }
 
     /**
@@ -127,6 +125,11 @@ class Etablissement
      */
     private $shortDescription;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="etablissement", orphanRemoval=true)
+     */
+    private $reservations;
+
 
 
     public function __construct()
@@ -134,6 +137,7 @@ class Etablissement
         $this->suites = new ArrayCollection();
 
         $this->updatedAt = new \DateTime();
+        $this->reservations = new ArrayCollection();
 
     }
 
@@ -276,6 +280,36 @@ class Etablissement
     public function setShortDescription(string $shortDescription): self
     {
         $this->shortDescription = $shortDescription;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setEtablissement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getEtablissement() === $this) {
+                $reservation->setEtablissement(null);
+            }
+        }
 
         return $this;
     }

@@ -13,7 +13,11 @@
                 <h3 class="text-center">Nos suites: </h3>
                 <ul>
                 {% for suite in hotel.suites %}
-                    <h5 class="text-decoration-underline display-6 text-center">{{ suite }}: <a class="btn btn-dark" href="{{ path('suite', {'slug' : suite.slug}) }}">voir la suite</a></h5>
+                    <h5 class="text-decoration-underline display-6 text-center">{{ suite }}:
+                        <a class="btn btn-dark" href="{{ path('suite', {'slug' : suite.slug}) }}">voir la suite</a>
+                        <a class="btn btn-dark" href="{{ path('app_booking_new', {'slug' : suite.slug}) }}">réserver</a>
+                    </h5>
+
                 </ul>
                 {% endfor %}
             </div>

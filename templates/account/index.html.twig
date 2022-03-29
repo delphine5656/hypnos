@@ -6,6 +6,7 @@
 
 <div class="example-wrapper">
     <h1 class="display-1 text-center" >Votre compte Hypnos</h1>
+
     <section class="my-1 justify-content-center">
     <br>
     {%  if is_granted('ROLE_EDITOR') %}
@@ -23,10 +24,7 @@
                                 <a class="nav-link active btn-dark"> Dashboard</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link btn-dark"  href="">Vos réservations</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link btn-dark" href="">Account details</a>
+                                <a class="nav-link btn-dark"  href="{{ path('app_gestion_mes_reservations') }}">Vos réservations</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link btn-dark" href="{{ path('app_logout')}}"><i class="ti-lock"></i>Logout</a>
@@ -43,7 +41,8 @@
                                     <h3>Bonjour {{ app.user.firstname }} {{ app.user.lastnamme }}</h3>
                                 </div>
                                 <div class="card-body">
-                                    <p>Bienvenue sur votre compte. Vous pouvez facilement gérer et voir  <a class="btn btn-dark" href="">réservations</a> et <a class="btn btn-dark" href="{{ path('app_forgot_password_request') }}">modifier votre mot de passe</a></p>
+                                    <p>Bienvenue sur votre compte. Vous pouvez facilement gérer et voir  <a class="btn btn-dark" href="{{ path('app_gestion_mes_reservations') }}">réservations</a> et <a class="btn btn-dark" href="{{ path('app_forgot_password_request') }}">modifier votre mot de passe</a></p>
+                                    <p>Vous pouvez aussi <a href="{{ path('app_booking_new') }}" class="btn btn-dark">réserver une suite</a></p>
                                 </div>
                             </div>
                         </div>
@@ -52,6 +51,5 @@
             </div>
         </div>
     </section>
-
 </div>
 {% endblock %}

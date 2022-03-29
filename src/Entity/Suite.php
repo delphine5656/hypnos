@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints\DateTime;
+use App\Validator\Constraints as MyConstraint;
 
 /**
  * @ORM\Entity(repositoryClass=SuiteRepository::class)

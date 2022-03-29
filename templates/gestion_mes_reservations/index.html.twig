@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vos réservations chez Hypnos{% endblock %}
+
+{% block body %}
+        <div class="container text-center" >
+            <h1 class="text-center display-1">Vos réservations</h1>
+            Bienvenue <strong>{{ app.user.firstname}} {{ app.user.lastnamme}} </strong>dans votre compte.<br> C'est ici que vous allez pouvoir gérer toutes vos réservations.<br>
+            <hr>
+            <h3>voici vos réservations:</h3>
+
+            {% for reservation in app.user.reservations %}
+                <p>{{ reservation.suites }}: du {{ reservation.dateDebut|date("m/d/Y") }} au {{ reservation.dateFin|date("m/d/Y") }} à {{reservation.suites.etablissement }}</p>
+                <a href="{{ path('app_booking_delete', {'id': reservation.id}) }}" class="btn btn-dark">Annuler ma réservation</a>
+            {% endfor %}
+
+            <hr>
+            <a href="{{ path('app_booking_new') }}" class="btn btn-dark">réserver une suite</a>
+            <a href="{{ path('account') }}" class="btn btn-dark">Retourner sur mon compte</a>
+        </div>
+    {% endblock %}
+

@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Classe\Search;
-use App\Entity\SearchVille;
 use App\Entity\Suite;
 use App\Entity\Ville;
 use App\Form\SearchType;

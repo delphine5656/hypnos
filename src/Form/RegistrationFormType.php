@@ -21,6 +21,7 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('firstname',  TextType::class, [
                 'label' => 'Votre prénom',
+                'required' => true,
                 'constraints' => new Length([
                     'min' => 2,
                     'max' => 30
@@ -32,6 +33,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('lastnamme', TextType::class , [
                 'label' => 'Votre nom',
+                'required' => true,
                 'constraints' => new Length([
                     'min' => 2,
                     'max' => 80
@@ -43,6 +45,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('email', EmailType::class, [
                 'label' => 'Votre email',
+                'required' => true,
                 'attr' => [
                     'placeholder'=> 'saisissez votre email',
                     'class' => 'form-control'
@@ -53,6 +56,7 @@ class RegistrationFormType extends AbstractType
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
+                'required' => true,
                 'attr' => [
                     'autocomplete' => 'new-password',
                     'class' => 'form-control'

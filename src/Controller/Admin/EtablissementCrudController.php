@@ -37,8 +37,8 @@ class EtablissementCrudController extends AbstractCrudController
             TextareaField::new('adress'),
             TextareaField::new('shortDescription'),
             TextareaField::new('description'),
-            IntegerField::new('nombreSuite'),
             AssociationField::new('villes'),
+            IntegerField::new('nombreSuite'),
             AssociationField::new('gerant')
         ];
 

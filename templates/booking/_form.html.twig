@@ -1,0 +1,22 @@
+<div class="section pt-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="leads">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
+                {{  form_start(form)  }}
+                {{ form_row(form.titre) }}
+                {{ form_row(form.dateDebut) }}
+                {{ form_row(form.dateFin) }}
+                {{ form_row(form.etablissement) }}
+                {{ form_row(form.suites) }}
+                {{ form_row(form.all_day) }}
+                <div class="my-2">
+                    <button class="btn btn-dark">{{ button_label|default('envoyer') }}</button>
+                </div>
+                {{ form_end(form) }}
+
+            </div>
+
+        </div>
+    </div>
+</div>

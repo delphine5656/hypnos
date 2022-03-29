@@ -50,7 +50,7 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::linkToCrud('Suite', 'fas fa-solid fa-list', Suite::class);
 
-        yield MenuItem::linkToRoute('Ville', 'fa fa-solid fa-city', Ville::class)
+        yield MenuItem::linkToCrud('Ville', 'fa fa-solid fa-city', Ville::class)
             ->setPermission('ROLE_ADMIN');
 
         yield MenuItem::linkToCrud('Contact', 'fas fa-envelope', Contact::class)

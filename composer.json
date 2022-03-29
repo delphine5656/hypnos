@@ -4,7 +4,7 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=7.2.5",
+        "php": ">=7.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/annotations": "^1.0",
@@ -47,10 +47,12 @@
         "symfony/yaml": "5.4.*",
         "symfonycasts/reset-password-bundle": "^1.13",
         "symfonycasts/verify-email-bundle": "^1.10",
+        "tattali/calendar-bundle": "^1.2",
         "twbs/bootstrap": "5.1.",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
-        "vich/uploader-bundle": "^1.19"
+        "vich/uploader-bundle": "^1.19",
+      "ext-json": "*"
     },
     "config": {
         "allow-plugins": {

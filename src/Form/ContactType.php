@@ -23,6 +23,7 @@ class ContactType extends AbstractType
         $builder
             ->add('name',  TextType::class, [
                 'label' => 'Votre nom',
+                'required' => true,
                 'constraints' => new Length([
                     'min' => 2,
                     'max' => 30
@@ -34,6 +35,7 @@ class ContactType extends AbstractType
             ])
             ->add('email', EmailType::class, [
                 'label' => 'Votre email',
+                'required' => true,
                 'attr' => [
                     'placeholder'=> 'saisissez votre email',
                     'class' => 'form-control'

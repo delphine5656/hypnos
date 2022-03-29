@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réserver une suite Hypnos{% endblock %}
+
+
+{% block body %}
+    <h1 class="text-center display-1">Réservation de votre suite</h1>
+    <div class="text-center py-5">
+        {{ include('booking/_form.html.twig') }}
+
+        <a href="{{ path('suites') }}" class="btn btn-dark mt-2">retour aux suites d'hypnos</a>
+    </div>
+
+    <div  id="calendrier"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js" integrity="sha256-YicH/8aE660iEnJtgll3vT54dJApy3XkYmqNfGVFEzA=" crossorigin="anonymous"></script>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://momentjs.com/downloads/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/locale/fr.js"></script>
+
+    <script type="text/javascript">
+
+        window.onload = () => {
+
+            let calendarElt = document.getElementById('calendrier');
+            let calendar = new FullCalendar.Calendar(calendarElt, {
+                eventSources: [
+                    {
+                        url: "/fc-load-events",
+                        method: "POST",
+                        extraParams: {
+                            filters: JSON.stringify({})
+                        },
+                        failure: () => {
+                            // alert("There was an error while fetching FullCalendar!");
+                        },
+                    },
+                ],
+                initialView: 'dayGridMonth',
+                lazyFetching: true,
+                locale:'fr',
+                timeZone: 'Europe/Paris',
+                navLinks: true, // can click day/week names to navigate views
+                headerToolbar: {
+                    start: 'prev,next today',
+                    center: 'title',
+                    end: 'dayGridMonth,timeGridWeek'
+                },
+                events: {{ data|raw }},
+                editable: true,
+                eventResizableFromStart: true
+            })
+
+
+
+            calendar.render();
+        }
+
+    </script>
+
+{% endblock %}

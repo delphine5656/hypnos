@@ -6,6 +6,7 @@ use App\Repository\ReservationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ReservationRepository::class)
@@ -21,11 +22,16 @@ class Reservation
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\GreaterThan("today")
      */
     private $dateDebut;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\Expression(
+     *     "this.getDateDebut() < this.getDateFin()",
+     *     message="La date fin ne doit pas être antérieure à la date début"
+     * )
      */
     private $dateFin;
 
@@ -44,10 +50,39 @@ class Reservation
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $decription;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $all_day;
+
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    private $titre;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Etablissement::class, inversedBy="reservations")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $etablissement;
+
     public function __construct()
     {
         $this->suite = new ArrayCollection();
+
     }
+
+    public function __toString()
+    {
+        return $this->getTitre();
+    }
+
 
     public function getId(): ?int
     {
@@ -125,4 +160,56 @@ class Reservation
 
         return $this;
     }
+
+    public function getDecription(): ?string
+    {
+        return $this->decription;
+    }
+
+    public function setDecription(?string $decription): self
+    {
+        $this->decription = $decription;
+
+        return $this;
+    }
+
+    public function getAllDay(): ?bool
+    {
+        return $this->all_day;
+    }
+
+    public function setAllDay(bool $all_day): self
+    {
+        $this->all_day = $all_day;
+
+        return $this;
+    }
+
+
+
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
+
+    public function setTitre(?string $titre): self
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    public function getEtablissement(): ?Etablissement
+    {
+        return $this->etablissement;
+    }
+
+    public function setEtablissement(?Etablissement $etablissement): self
+    {
+        $this->etablissement = $etablissement;
+
+        return $this;
+    }
+
+
 }
