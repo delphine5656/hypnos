@@ -24,5 +24,9 @@
         "autoprefixer": "^10.4.4",
         "fullcalendar": "^5.10.2",
         "postcss-loader": "^6.2.1"
+    },
+    "engines": {
+        "node": "v14.17.1",
+        "npm": "7.18.1"
     }
 }
