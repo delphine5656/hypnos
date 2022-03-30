@@ -63,5 +63,7 @@ class HotelController extends AbstractController
         return $this->render('hotel/show.html.twig', [
             'hotel' => $hotel,
         ]);
+
+
     }
 }

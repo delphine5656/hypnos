@@ -1,0 +1,87 @@
+@import "~bootstrap/scss/bootstrap";
+/*reset css*/
+*, ::before, ::after{
+    box-sizing: border-box;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    height: 100vh;
+}
+ol, ul, li {
+    list-style: none;
+}
+/*fin reset css*/
+
+
+.btn{
+    border-radius: 10px;
+}
+.btn:hover{
+    color: #8300ff;
+}
+a{
+    color:blueviolet;
+    text-decoration: none;
+}
+a:hover{
+    color: #8300ff;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    padding: 10px;
+
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+.header {
+    background-image: url('assets/images/header.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+
+}
+
+
+.poly {
+    height: 200px;
+    width: 100vw;
+    background-color: black;
+    clip-path: polygon(0 0, 100% 0, 52% 46%, 52% 46%);
+}
+
+
+.argument {
+    background-image: url("assets/images/bg-hotel.jpg");
+    height: 300px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 1.2em;
+    margin-top: 1em;
+}
+h4 {
+    color: white;
+}
+
+.card{
+    background-image: url("assets/images/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}

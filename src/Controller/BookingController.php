@@ -6,9 +6,12 @@ use App\Entity\Reservation;
 use App\Form\Reservation1Type;
 use App\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 
 
@@ -18,11 +21,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class BookingController extends AbstractController
 {
     /**
-     * @Route("/calendar", name="booking_calendar", methods={"GET"})
+     * @Route("/new", name="app_booking_new", methods={"GET"})
      */
     public function calendar(): Response
     {
-        return $this->render('booking/index.html.twig');
+        return $this->render('booking/calendar.html.twig');
     }
 
 
@@ -45,6 +48,12 @@ class BookingController extends AbstractController
         $form = $this->createForm(Reservation1Type::class, $reservation);
         $form->handleRequest($request);
 
+
+
+
+
+
+
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
             $reservation->setUser($user);
@@ -54,31 +63,10 @@ class BookingController extends AbstractController
             return $this->redirectToRoute('account', [], Response::HTTP_SEE_OTHER);
         }
 
-        //partie calendrier
-        $events = $reservationRepository->findAll();
-        $booking = [];
-
-        foreach($events as $event){
-            $booking[] = [
-                'id' => $event->getId(),
-                'dateDebut' => $event->getDateDebut()->format('Y-m-d H:i:s'),
-                'dateFin' => $event->getDateFin()->format('Y-m-d H:i:s'),
-                'decription' => $event->getDecription(),
-                'suite' => $event->getSuite(),
-                'user' => $event->getUser(),
-                'allDay' => $event->getAllDay(),
-            ];
-        }
-
-        $data = json_encode($booking);
-
-
-//fin calendrier
 
         return $this->renderForm('booking/new.html.twig', [
             'reservation' => $reservation,
             'form' => $form,
-            'data' => $data,
         ]);
 
 
@@ -119,15 +107,19 @@ class BookingController extends AbstractController
      */
     public function delete(Request $request, Reservation $reservation, ReservationRepository $reservationRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$reservation->getId(), $request->request->get('_token'))) {
-            $reservationRepository->remove($reservation);
-        }
 
-        $this->addFlash(
-            'success',
-            "La réservation a bien été supprimée"
-        );
+           if ($this->isCsrfTokenValid('delete'.$reservation->getId(), $request->request->get('_token'))) {
+               $reservationRepository->remove($reservation);
+               $this->addFlash(
+                   'success',
+                   "La réservation a bien été supprimée"
+               );
+           }
+
 
         return $this->redirectToRoute('account', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
 }

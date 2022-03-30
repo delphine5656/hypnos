@@ -55,6 +55,9 @@ class ContactType extends AbstractType
             ->add('subject')
             ->add('content',  TextareaType::class, [
                 'label' => 'Votre message',
+                'constraints' => new Length([
+                    'min' => 5,
+                ]),
                 'attr' => [
                     'placeholder'=> 'saisissez votre message',
                     'class' => 'form-control'

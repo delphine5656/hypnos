@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Classe\Search;
+use App\Entity\Reservation;
 use App\Entity\Suite;
 use App\Entity\Ville;
+use App\Form\Reservation1Type;
 use App\Form\SearchType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -64,5 +66,7 @@ class SuiteController extends AbstractController
         return $this->render('suite/show.html.twig', [
             'suite' => $suite,
         ]);
+
+
     }
 }

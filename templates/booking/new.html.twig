@@ -2,6 +2,19 @@
 
 {% block title %}Réserver une suite Hypnos{% endblock %}
 
+{% block stylesheets %}
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
+    <style>
+        #calendar-holder{
+            width: 50%;
+            height: auto;
+        }
+
+    </style>
+{% endblock %}
 
 {% block body %}
     <h1 class="text-center display-1">Réservation de votre suite</h1>
@@ -11,56 +24,47 @@
         <a href="{{ path('suites') }}" class="btn btn-dark mt-2">retour aux suites d'hypnos</a>
     </div>
 
-    <div  id="calendrier"></div>
-
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js" integrity="sha256-YicH/8aE660iEnJtgll3vT54dJApy3XkYmqNfGVFEzA=" crossorigin="anonymous"></script>
-
+    <div id="calendar-holder"></div>
 {% endblock %}
 
 {% block javascripts %}
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="https://momentjs.com/downloads/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/locale/fr.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
     <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            var calendarEl = document.getElementById('calendar-holder');
 
-        window.onload = () => {
-
-            let calendarElt = document.getElementById('calendrier');
-            let calendar = new FullCalendar.Calendar(calendarElt, {
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                locale: 'fr',
+                height: 450,
+                contentHeight: 450,
+                aspectRatio: 2.5,
+                defaultView: 'dayGridMonth',
+                editable: true,
                 eventSources: [
                     {
-                        url: "/fc-load-events",
+                        url: "{{ path('fc_load_events') }}",
                         method: "POST",
                         extraParams: {
                             filters: JSON.stringify({})
                         },
                         failure: () => {
-                            // alert("There was an error while fetching FullCalendar!");
+                             alert("There was an error while fetching FullCalendar!");
                         },
                     },
                 ],
-                initialView: 'dayGridMonth',
-                lazyFetching: true,
-                locale:'fr',
-                timeZone: 'Europe/Paris',
-                navLinks: true, // can click day/week names to navigate views
-                headerToolbar: {
-                    start: 'prev,next today',
+                header: {
+                    left: 'prev,next today',
                     center: 'title',
-                    end: 'dayGridMonth,timeGridWeek'
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay',
                 },
-                events: {{ data|raw }},
-                editable: true,
-                eventResizableFromStart: true
-            })
-
-
-
+                plugins: [ 'interaction', 'dayGrid', 'timeGrid' ], // https://fullcalendar.io/docs/plugin-index
+                timeZone: 'UTC',
+            });
             calendar.render();
-        }
-
+        });
     </script>
 
 {% endblock %}
