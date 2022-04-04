@@ -28,7 +28,7 @@
 
     <div class="my-3">
         {% for images in suite.attachements %}
-            <img src="/images/attachments/{{ images }}" class="img-fluid">
+            <img src="{{ asset('images/attachments/{{ images }}') }}" class="img-fluid">
         {% endfor %}
     </div>
         <!-- START THE FEATURETTES -->
