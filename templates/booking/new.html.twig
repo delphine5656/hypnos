@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Réserver une suite Hypnos{% endblock %}
-<p> votre réservation en un clic</p>
 
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -40,6 +39,7 @@
 
 {% block body %}
     <h1 class="text-center display-1">Réservation de votre suite</h1>
+    <p> votre réservation en un clic</p>
 
     <div class="text-center py-5">
         {{ include('booking/_form.html.twig') }}
