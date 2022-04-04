@@ -21,15 +21,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class BookingController extends AbstractController
 {
     /**
-     * @Route("/new", name="app_booking_new", methods={"GET"})
-     */
-    public function calendar(): Response
-    {
-        return $this->render('booking/calendar.html.twig');
-    }
-
-
-    /**
      * @Route("/", name="app_booking_index", methods={"GET"})
      */
     public function index(ReservationRepository $reservationRepository): Response

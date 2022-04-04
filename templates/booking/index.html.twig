@@ -19,6 +19,7 @@
         </thead>
         <tbody>
         {% for reservation in reservations %}
+            {{ dump(reservation) }}
             <tr>
                 <td>{{ reservation.id }}</td>
                 <td>{{ reservation.dateDebut ? reservation.dateDebut|date('Y-m-d') : '' }}</td>
@@ -33,7 +34,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="10">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
