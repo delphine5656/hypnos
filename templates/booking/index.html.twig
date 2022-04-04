@@ -3,8 +3,8 @@
 {% block title %}Reservation index{% endblock %}
 
 {% block body %}
-    <h1>Reservation index</h1>
-
+    <h1>Liste des réservations</h1>
+    <p> Voici la liste</p>
     <table class="table">
         <thead>
             <tr>
@@ -12,6 +12,7 @@
                 <th>DateDebut</th>
                 <th>DateFin</th>
                 <th>Decription</th>
+                <th>Suites</th>
                 <th>All_day</th>
                 <th>actions</th>
             </tr>
@@ -23,6 +24,7 @@
                 <td>{{ reservation.dateDebut ? reservation.dateDebut|date('Y-m-d') : '' }}</td>
                 <td>{{ reservation.dateFin ? reservation.dateFin|date('Y-m-d') : '' }}</td>
                 <td>{{ reservation.decription }}</td>
+                <td>{{ reservation.suites }}</td>
                 <td>{{ reservation.allDay ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('app_booking_show', {'id': reservation.id}) }}">show</a>

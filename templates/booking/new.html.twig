@@ -3,14 +3,35 @@
 {% block title %}Réserver une suite Hypnos{% endblock %}
 
 {% block stylesheets %}
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <style>
-        #calendar-holder{
-            width: 50%;
-            height: auto;
+        .input-group {
+            border-radius: 5px;
+        }
+        input.form-control {
+            border-radius: 5px 0 0 5px;
+            border: solid 1px rgba(0,0,0,.15);
+            border-right: none;
+        }
+        input.form-control:focus {
+            box-shadow: none;
+            border-color: rgba(0,0,0,.15);
+        }
+        input.form-control::placeholder {
+            font-family: 'Open sans', sans-serif;
+            font-size: 15px;
+            letter-spacing: 1px;
+        }
+        .input-group-append {
+            border: solid 1px rgba(0,0,0,.15);
+            border-left: none;
+            border-radius: 0 5px 5px 0;
+        }
+        .input-group-text {
+            border-radius: 0 5px 5px 0;
+            color: #04c;
+            background-color: #fff;
+            border: none;
         }
 
     </style>
@@ -18,52 +39,29 @@
 
 {% block body %}
     <h1 class="text-center display-1">Réservation de votre suite</h1>
+
     <div class="text-center py-5">
         {{ include('booking/_form.html.twig') }}
 
         <a href="{{ path('suites') }}" class="btn btn-dark mt-2">retour aux suites d'hypnos</a>
     </div>
 
-    <div id="calendar-holder"></div>
+
 {% endblock %}
 
 {% block javascripts %}
-<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', () => {
-            var calendarEl = document.getElementById('calendar-holder');
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                locale: 'fr',
-                height: 450,
-                contentHeight: 450,
-                aspectRatio: 2.5,
-                defaultView: 'dayGridMonth',
-                editable: true,
-                eventSources: [
-                    {
-                        url: "{{ path('fc_load_events') }}",
-                        method: "POST",
-                        extraParams: {
-                            filters: JSON.stringify({})
-                        },
-                        failure: () => {
-                             alert("There was an error while fetching FullCalendar!");
-                        },
-                    },
-                ],
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay',
-                },
-                plugins: [ 'interaction', 'dayGrid', 'timeGrid' ], // https://fullcalendar.io/docs/plugin-index
-                timeZone: 'UTC',
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.fn.datepicker.defaults.format = "mm/dd/yyyy";
+            $('.datepicker').datepicker({
+                autoclose: 'true',
+                daysOfWeekDisabled: '2',
+                todayHighlight: 'true',
             });
-            calendar.render();
         });
     </script>
 

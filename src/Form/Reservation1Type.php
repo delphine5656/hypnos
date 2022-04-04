@@ -36,9 +36,15 @@ class Reservation1Type extends AbstractType
 
             ->add('dateDebut', DateType::class, [
                 'required' => true,
+                'widget' => 'single_text',
+                'attr' => ['class' => 'js-datepicker'],
+
             ])
             ->add('dateFin', DateType::class, [
                 'required' => true,
+                'widget' => 'single_text',
+                'attr' => ['class' => 'js-datepicker'],
+
             ])
             ->add('all_day')
 
