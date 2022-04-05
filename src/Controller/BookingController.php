@@ -42,13 +42,6 @@ class BookingController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
 
-            if(!$reservation->isBookableDates()){
-                $this->addFlash(
-                    'success',
-                    'les dates ne sont pas disponibles');
-            }
-
-
             return $this->redirectToRoute('account', [], Response::HTTP_SEE_OTHER);
         }
 
