@@ -3,67 +3,82 @@
 {% block title %}Réserver une suite Hypnos{% endblock %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <style>
-        .input-group {
-            border-radius: 5px;
+        .para{
+            margin-left: 13%;
+            width: 75%;
         }
-        input.form-control {
-            border-radius: 5px 0 0 5px;
-            border: solid 1px rgba(0,0,0,.15);
-            border-right: none;
+        .btn-success{
+            margin-left: 42%;
+            margin-top: 2%;
+            cursor: pointer;
         }
-        input.form-control:focus {
-            box-shadow: none;
-            border-color: rgba(0,0,0,.15);
+        h2{
+            color: #218838;
         }
-        input.form-control::placeholder {
-            font-family: 'Open sans', sans-serif;
-            font-size: 15px;
-            letter-spacing: 1px;
-        }
-        .input-group-append {
-            border: solid 1px rgba(0,0,0,.15);
-            border-left: none;
-            border-radius: 0 5px 5px 0;
-        }
-        .input-group-text {
-            border-radius: 0 5px 5px 0;
-            color: #04c;
-            background-color: #fff;
-            border: none;
-        }
-
     </style>
 {% endblock %}
 
 {% block body %}
     <h1 class="text-center display-1">Réservation de votre suite</h1>
-    <p> votre réservation en un clic</p>
+
 
     <div class="text-center py-5">
         {{ include('booking/_form.html.twig') }}
-
         <a href="{{ path('suites') }}" class="btn btn-dark mt-2">retour aux suites d'hypnos</a>
     </div>
-
-
 {% endblock %}
 
 {% block javascripts %}
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script  type="text/javascript">
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $.fn.datepicker.defaults.format = "mm/dd/yyyy";
-            $('.datepicker').datepicker({
-                autoclose: 'true',
-                daysOfWeekDisabled: '2',
-                todayHighlight: 'true',
+        $(document).ready(function(){
+            $('#booking_startDate, #booking_endDate').datepicker({
+                format: 'dd/mm/yyyy',
+                datesDisabled: [
+                    {% for day in suites.notAvailableDays %}
+                    "{{ day.format('d/m/Y') }}",
+                    {% endfor %}
+                ],
+                startDate: new Date()
             });
+
+            $('#booking_startDate, #booking_endDate').on('change', calculateAmount);
         });
+
+        function calculateAmount() {
+            // On chope les dates
+            const endDate = new Date(
+                $('#booking_endDate')
+                    .val()
+                    .replace(/(\d+)\/(\d+)\/(\d{4})/, '$3-$2-$1')
+            );
+
+            const startDate = new Date(
+                $('#booking_startDate')
+                    .val()
+                    .replace(/(\d+)\/(\d+)\/(\d{4})/, '$3-$2-$1')
+            );
+
+            if(startDate && endDate && startDate < endDate){
+                const DAY_TIME  = 24 * 60 * 60 * 1000;
+
+                const interval  = dateFin.getTime() - dateDebut.getTime();
+                const days      = interval / DAY_TIME;
+                const amount    = days * {{ suites.price }};
+
+                $('#days').text(days);
+                $('#amount').text(amount.toLocaleString('fr-FR'));
+            }
+        }
     </script>
 
 {% endblock %}

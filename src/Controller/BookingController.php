@@ -11,8 +11,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
-
+use Symfony\Component\Validator\Constraints\DateTime;
 
 
 /**
@@ -40,16 +39,15 @@ class BookingController extends AbstractController
         $form->handleRequest($request);
 
 
-
-
-
-
-
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
-            $reservation->setUser($user);
 
-            $reservationRepository->add($reservation);
+            if(!$reservation->isBookableDates()){
+                $this->addFlash(
+                    'success',
+                    'les dates ne sont pas disponibles');
+            }
+
 
             return $this->redirectToRoute('account', [], Response::HTTP_SEE_OTHER);
         }
@@ -62,7 +60,6 @@ class BookingController extends AbstractController
 
 
     }
-
     /**
      * @Route("/{id}", name="app_booking_show", methods={"GET"})
      */

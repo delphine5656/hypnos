@@ -42,10 +42,6 @@ class SuiteController extends AbstractController
 
 
         }
-
-
-
-
         return $this->render('suite/index.html.twig', [
             'suites' => $suites,
             'form' => $form->createView()
@@ -66,7 +62,5 @@ class SuiteController extends AbstractController
         return $this->render('suite/show.html.twig', [
             'suite' => $suite,
         ]);
-
-
     }
 }

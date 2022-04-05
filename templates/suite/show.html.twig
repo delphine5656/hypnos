@@ -3,9 +3,21 @@
 {% block title %} {{ suite.titre }}{% endblock %}
 
 {% block body %}
+    <style>
+        .gallery {
+            max-width: 1300px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .galleryImage{
+            width: 300px;
+            height: 300px;
+        }
+    </style>
     <header class="text-center">
     <h1 class="display-1 text-center">{{ suite.titre }} <span>{{ suite.price / 100}}€ /nuit</span></h1>
-    <h2 class="text-center">l'hôtel {{ suite.etablissement }} - {{ suite.ville }}</h2>
+    <h2 class="text-center">l'hôtel {{ suite.etablissement }}</h2>
     <a href="{{ path('app_booking_new') }}" class="btn btn-dark btn-lg p-1">Réserver</a>
     </header>
 
@@ -26,9 +38,9 @@
             </div><!-- /.col-lg-4 -->
         </div><!-- /.row -->
 
-    <div class="my-3">
+    <div class="my-3 gallery">
         {% for images in suite.attachements %}
-            <img src="/images/attachments/{{ images }}" class="img-fluid">
+            <img src="/images/attachments/{{ images }}" class="img-fluid galleryImage">
         {% endfor %}
     </div>
         <!-- START THE FEATURETTES -->
@@ -42,8 +54,6 @@
             </div>
             <div class="col-md-5">
 
-                <div  id="calendrier"></div>
-
             </div>
         </div>
         <!-- /END THE FEATURETTES -->
@@ -53,23 +63,6 @@
 {% block javascripts %}
 
     <script>
-        window.onload = () => {
-            let calendarElt = document.querySelector("#calendrier")
-            let calendar = new FullCalendar.Calendar(calendarElt, {
-                initialView: 'dayGridMonth',
-                local:'fr',
-                timeZone: 'Europe/Paris',
-                headerToolbar: {
-                    start: 'prev,next today',
-                    center: 'title',
-                    end: 'dayGridMonth,timeGridWeek'
-                },
-
-
-
-            });
-            calendar.render();
-        }
 
     </script>
 
