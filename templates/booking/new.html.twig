@@ -21,19 +21,16 @@
             margin-top: 2%;
             cursor: pointer;
         }
-        h2{
-            color: #218838;
-        }
     </style>
 {% endblock %}
 
 {% block body %}
     <h1 class="text-center display-1">Réservation de votre suite</h1>
 
-
     <div class="text-center py-5">
         {{ include('booking/_form.html.twig') }}
-        <a href="{{ path('suites') }}" class="btn btn-dark mt-2">retour aux suites d'hypnos</a>
+
+        <a href="{{ path('suites') }}" class="btn btn-dark mt-2">retour aux suites d'Hypnos</a>
     </div>
 {% endblock %}
 
@@ -41,7 +38,7 @@
     <script  type="text/javascript">
 
             $(function() {
-                $('#datetimepicker1').datetimepicker();
+                $('#datetimepicker1').dateTime;
             });
 
     </script>

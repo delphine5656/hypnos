@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 
@@ -23,7 +24,7 @@ class Reservation1Type extends AbstractType
 {
 
 
-    public function buildForm(FormBuilderInterface $builder, array $options): void
+    public function buildForm(FormBuilderInterface $builder, array $options ): void
     {
         $builder
             ->add('titre', TextType::class, [
@@ -31,7 +32,8 @@ class Reservation1Type extends AbstractType
                 'constraints' => new Length([
                     'min' => 5,
                     'max' => 19
-                ])
+                ]),
+                'attr' => ['placeholder' => $options['titre']]
             ])
 
             ->add('dateDebut', DateType::class, [
@@ -49,13 +51,16 @@ class Reservation1Type extends AbstractType
             ->add('all_day')
 
             ->add('etablissement', EntityType::class, [
+                'placeholder' => 'Choisir un hôtel',
                 'class' => Etablissement::class,
                 'choice_label' => function($etablissement){
                     return $etablissement->getName().'('.$etablissement->getVilles().')';
                 },
                 'query_builder' => function(EtablissementRepository $etablissementRepository){
                 return $etablissementRepository->createQueryBuilder('e')->orderBy('e.name', 'ASC');
-                }
+                },
+                'required' => false,
+                'mapped' => false
             ])
 
             ->add('suites', EntityType::class, [
@@ -65,17 +70,26 @@ class Reservation1Type extends AbstractType
                 },
                 'query_builder' => function(SuiteRepository $suiteRepository){
                     return $suiteRepository->createQueryBuilder('s')->orderBy('s.titre', 'ASC');
-                }
+                },
+                'placeholder' => 'choisir une suite',
+                'label' => 'suite',
+                'mapped' => false,
+                'required' => false,
             ])
 
-            ;
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Reservation::class,
+            'titre' => null
+
 
         ]);
     }
+
+
+
 }

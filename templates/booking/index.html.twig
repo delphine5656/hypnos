@@ -18,7 +18,6 @@
         </thead>
         <tbody>
         {% for reservation in reservations %}
-            {{ dump(reservation) }}
             <tr>
                 <td>{{ reservation.id }}</td>
                 <td>{{ reservation.dateDebut ? reservation.dateDebut|date('Y-m-d') : '' }}</td>

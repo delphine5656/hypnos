@@ -40,7 +40,7 @@
 
     <div class="my-3 gallery">
         {% for images in suite.attachements %}
-            <img src="/images/attachments/{{ images }}" class="img-fluid galleryImage">
+            <img src="/images/attachments/{{ images }}" class="img-fluid galleryImage" alt="{{ suite.titre }}">
         {% endfor %}
     </div>
         <!-- START THE FEATURETTES -->
