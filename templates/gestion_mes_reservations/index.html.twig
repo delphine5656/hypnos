@@ -7,7 +7,7 @@
             <h1 class="text-center display-1">Vos réservations</h1>
             Bienvenue <strong>{{ app.user.firstname}} {{ app.user.lastnamme}} </strong>dans votre compte.<br> C'est ici que vous allez pouvoir gérer toutes vos réservations.<br>
             <hr>
-            <h3>voici vos réservations:</h3>
+            <h2>voici vos réservations:</h2>
 
             {% for reservation in app.user.reservations %}
                 <p>{{ reservation.suites }}: du {{ reservation.dateDebut|date("m/d/Y") }} au {{ reservation.dateFin|date("m/d/Y") }} à {{reservation.suites.etablissement }}</p>

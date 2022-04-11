@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=GerantRepository::class)
  */
@@ -39,11 +39,13 @@ class Gerant implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length (min=2, max=20, minMessage="le nom doit faire minimum 2 caractères")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length (min=2, max=20, minMessage="le nom doit faire minimum 2 caractères")
      */
     private $lastname;
 

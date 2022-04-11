@@ -84,7 +84,7 @@
         <section class="container py-5">
             <div class="row container justify-content-center align-items-center">
                 <div class="col-md-5">
-                    <img src="assets/images/bg-hotel.jpg" alt="" class="img-fluid mx-auto" width="500" height="500">
+                    <img src="assets/images/bg-hotel.jpg" alt="" class="img-fluid mx-auto" width="500" height="500" alt="maison sur piloti sur une plage en fond de couleur rosé">
                 </div>
                 <div class="col-md-7">
                     <h2 class="featurette-heading">Le groupe Hypnos </h2>
@@ -109,7 +109,7 @@
                     <button class="btn btn-dark">Nous contacter</button>
                 </div>
                 <div class="col-md-5">
-                    <img src="assets/images/beach.jpg" alt="" class="img-fluid mx-auto" width="500" height="500">
+                    <img src="assets/images/beach.jpg" alt="" class="img-fluid mx-auto" width="500" height="500" alt=" un couple au bord de la mer ">
                 </div>
             </div>
 
@@ -151,7 +151,7 @@
                         {% for hotel in etablissement %}
                         <div class="col">
                             <div class="card shadow-sm bg-transparent text-center text-white">
-                                <img src="/images/thumbnails/{{ hotel.thumbnail }}" class="card-img-top" height="200" alt="...">
+                                <img src="/images/thumbnails/{{ hotel.thumbnail }}" class="card-img-top" height="200" alt="{{ hotel.name }}">
 
                                 <div class="card-body">
                                     <h4>{{ hotel.name }}</h4>

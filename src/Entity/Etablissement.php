@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EtablissementRepository::class)
@@ -24,6 +26,8 @@ class Etablissement
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length (min=2, max=20, minMessage="le nom doit faire minimum 2 caractères")
+     * @Groups({"listeReservation"})
      */
     private $name;
 

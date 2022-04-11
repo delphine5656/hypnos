@@ -8,9 +8,11 @@ use App\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 
@@ -22,11 +24,17 @@ class BookingController extends AbstractController
     /**
      * @Route("/", name="app_booking_index", methods={"GET"})
      */
-    public function index(ReservationRepository $reservationRepository): Response
-    {
-        return $this->render('booking/index.html.twig', [
-            'reservations' => $reservationRepository->findAll(),
-        ]);
+    public function index(ReservationRepository $reservationRepository, SerializerInterface $serializer): Response
+    {   $reservationRepository->findAll();
+        $resultat = $serializer->serialize(
+            $reservationRepository,
+            'json',
+            [
+                'groups' => ['listeReservation']
+            ]
+        );
+
+        return new JsonResponse($resultat, 200, [], true);
     }
 
     /**
@@ -56,11 +64,19 @@ class BookingController extends AbstractController
     /**
      * @Route("/{id}", name="app_booking_show", methods={"GET"})
      */
-    public function show(Reservation $reservation): Response
+    public function show(Reservation $reservation, SerializerInterface $serializer): Response
     {
-        return $this->render('booking/show.html.twig', [
-            'reservation' => $reservation,
-        ]);
+        $resultat= $serializer->serialize(
+            $reservation,
+            'json',
+            [
+                'groups' => 'listeReservation'
+            ]
+        );
+        return new JsonResponse($resultat, 200, [], true);
+        //return $this->render('booking/show.html.twig', [
+           // 'reservation' => $reservation,
+       // ]);
     }
 
     /**

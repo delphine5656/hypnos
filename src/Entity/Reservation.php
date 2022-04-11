@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource()
@@ -20,12 +20,15 @@ class Reservation
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"listeReservation"})
      */
     private $id;
+
 
     /**
      * @ORM\Column(type="date")
      * @Assert\GreaterThan("today")
+     * @Groups({"listeReservation"})
      */
     private $dateDebut;
 
@@ -35,21 +38,25 @@ class Reservation
      *     "this.getDateDebut() < this.getDateFin()",
      *     message="La date fin ne doit pas être antérieure à la date début"
      * )
+     * @Groups({"listeReservation"})
      */
     private $dateFin;
 
     /**
      * @ORM\ManyToMany(targetEntity=Suite::class, inversedBy="reservations")
+     *  @Groups({"listeReservation"})
      */
     private $suite;
 
     /**
      * @ORM\ManyToOne(targetEntity=Suite::class, inversedBy="reservation")
+     * @Groups({"listeReservation"})
      */
     private $suites;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reservations")
+     * @Groups({"listeReservation"})
      */
     private $user;
 
@@ -72,6 +79,7 @@ class Reservation
     /**
      * @ORM\ManyToOne(targetEntity=Etablissement::class, inversedBy="reservations")
      * @ORM\JoinColumn(nullable=true)
+     * @Groups({"listeReservation"})
      */
     private $etablissement;
 

@@ -2,18 +2,22 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\SuiteRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints\DateTime;
 use App\Validator\Constraints as MyConstraint;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=SuiteRepository::class)
  * @Vich\Uploadable()
+ * @ApiResource()
  */
 class Suite
 {
@@ -21,11 +25,14 @@ class Suite
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"listeReservation"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=2, max=20, minMessage="le titre doit faire minimum 2 caractères")
+     * @Groups({"listeReservation"})
      */
     private $titre;
 
