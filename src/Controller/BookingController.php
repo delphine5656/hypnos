@@ -2,9 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Etablissement;
 use App\Entity\Reservation;
+use App\Entity\Suite;
 use App\Form\Reservation1Type;
+use App\Repository\EtablissementRepository;
 use App\Repository\ReservationRepository;
+use App\Repository\SuiteRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -62,6 +67,19 @@ class BookingController extends AbstractController
 
     }
     /**
+     * @Route("/booking/verification-disponibilite", name="booking_check_availability", methods={"POST"})
+     */
+    public function checkAvailability(Request $request, ReservationRepository $reservationRepository): JsonResponse
+    {
+        $reservation = $request->request->all()['reservation'];
+
+        $existingBooking = $reservationRepository->findExistingBookings($reservation);
+
+        return new JsonResponse([
+            'status' => empty($existingBooking) ? 'OK' : 'KO'
+        ]);
+    }
+    /**
      * @Route("/{id}", name="app_booking_show", methods={"GET"})
      */
     public function show(Reservation $reservation, SerializerInterface $serializer): Response
@@ -73,10 +91,8 @@ class BookingController extends AbstractController
                 'groups' => 'listeReservation'
             ]
         );
-        return new JsonResponse($resultat, 200, [], true);
-        //return $this->render('booking/show.html.twig', [
-           // 'reservation' => $reservation,
-       // ]);
+       // return new JsonResponse($resultat, 200, [], true);
+        return $this->render('booking/show.html.twig', ['reservation' => $reservation,]);
     }
 
     /**
@@ -104,12 +120,18 @@ class BookingController extends AbstractController
      */
     public function delete(Request $request, Reservation $reservation, ReservationRepository $reservationRepository): Response
     {
-
-           if ($this->isCsrfTokenValid('delete'.$reservation->getId(), $request->request->get('_token'))) {
+            $date = new DateTime();
+            $dateBooking =$reservation->getDateDebut()->modify('- 3 days');
+           if ($this->isCsrfTokenValid('delete'.$reservation->getId(), $request->request->get('_token')) && ($dateBooking > $date) ) {
                $reservationRepository->remove($reservation);
                $this->addFlash(
                    'success',
                    "La réservation a bien été supprimée"
+               );
+           } else {
+               $this->addFlash(
+                   'danger',
+                   "La réservation ne peut pas être supprimée moins de 3 jours avant la date de début de séjour"
                );
            }
 

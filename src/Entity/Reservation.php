@@ -11,7 +11,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *
+ *     normalizationContext={"groups"="listeReservation"}
+ * )
  * @ORM\Entity(repositoryClass=ReservationRepository::class)
  */
 class Reservation
@@ -71,6 +74,8 @@ class Reservation
     private $all_day;
 
 
+
+
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
@@ -82,6 +87,11 @@ class Reservation
      * @Groups({"listeReservation"})
      */
     private $etablissement;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $totalPrice;
 
     public function __construct()
     {
@@ -218,6 +228,29 @@ class Reservation
     public function setEtablissement(?Etablissement $etablissement): self
     {
         $this->etablissement = $etablissement;
+
+        return $this;
+    }
+
+    public function getNightsNumber(): int
+    {
+        if (null === $this->getDateDebut() || null === $this->getDateFin()) {
+            return false;
+        }
+
+        $diffInDays = (int) $this->getDateDebut()->diff($this->getDateFin())->format("%r%a");
+
+        return ($diffInDays > 0) ? $diffInDays : 0;
+    }
+
+    public function getTotalPrice(): ?int
+    {
+        return $this->totalPrice;
+    }
+
+    public function setTotalPrice(?int $totalPrice): self
+    {
+        $this->totalPrice = $totalPrice;
 
         return $this;
     }

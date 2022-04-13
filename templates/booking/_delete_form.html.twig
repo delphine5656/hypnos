@@ -9,4 +9,10 @@
 {% for message in app.flashes('success') %}
     <p>{{ message }}</p>
 {% endfor %}
+{% for message in app.flashes('danger') %}
+     <div class="mt-4 container alert alert-danger" role="alert">
+         <p>{{ message }}</p>
+         <hr>
+     </div>
+ {% endfor %}
 

@@ -59,8 +59,6 @@ class Reservation1Type extends AbstractType
                 'query_builder' => function(EtablissementRepository $etablissementRepository){
                 return $etablissementRepository->createQueryBuilder('e')->orderBy('e.name', 'ASC');
                 },
-                'required' => false,
-                'mapped' => false
             ])
 
             ->add('suites', EntityType::class, [
@@ -76,15 +74,16 @@ class Reservation1Type extends AbstractType
                 'mapped' => false,
                 'required' => false,
             ])
-
         ;
     }
+
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Reservation::class,
-            'titre' => null
+            'titre' => 'taper reservation',
+            'suites' => [],
 
 
         ]);

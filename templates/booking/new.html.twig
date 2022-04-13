@@ -35,12 +35,18 @@
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
     <script  type="text/javascript">
 
             $(function() {
                 $('#datetimepicker1').dateTime;
             });
 
+
+
+
+
     </script>
+
 
 {% endblock %}
